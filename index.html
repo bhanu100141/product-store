@@ -1,259 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Products Store</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
 
     <style>
-        .app-container {
-            padding: 40px;
+      .app-container {
+        padding: 40px;
+      }
 
+      .Nav-items {
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .Nav-items p {
+        border: 1px solid;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .Nav-items p:hover {
+        background-color: black;
+        color: white;
+      }
+
+      .heading {
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px;
+        margin-bottom: 50px;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+      }
+
+      .product {
+        width: 300px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 10px;
+        background-color: white;
+        transition: box-shadow 0.3s, transform 0.3s;
+      }
+
+      .product:hover {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        transform: scale(1.05);
+      }
+
+      .product img {
+        width: 60%;
+        height: auto;
+      }
+
+      #detailsModal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+      .modal-content {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 10px;
+        padding: 20px;
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        min-height: 300px;
+        border-radius: 10px;
+      }
+      .modal-content h2 {
+        margin-top: 80px;
+      }
+      #modalImage {
+        margin: 60px 0px 0px 20px;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 30px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close:hover {
+        color: red;
+      }
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+
+      .social-icons a {
+        color: #fff;
+        margin: 0 10px;
+        font-size: 24px;
+      }
+
+      .social-icons a:hover {
+        color: #fff;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .grid-container {
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          gap: 10px;
+          padding: 10px;
         }
 
-        .Nav-items {
-            display: flex;
-            justify-content: space-around;
-
+        .card img {
+          height: 50px;
+          object-fit: cover;
         }
-
-        .Nav-items p {
-            border: 1px solid;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .Nav-items p:hover {
-            background-color: black;
-            color: white;
-        }
-
-        .heading {
-            font-size: 40px;
-            font-weight: bold;
-            text-align: center;
-            margin: 20px;
-            margin-bottom: 50px;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 20px;
-
-        }
-
-        .product {
-            width: 300px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 10px;
-            background-color: white;
-            transition: box-shadow 0.3s, transform 0.3s;
-        }
-
-        .product:hover {
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            transform: scale(1.05);
-        }
-
-        .product img {
-            width: 60%;
-            height: auto;
-
-        }
-        /* #productsContainer{
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            gap: 10px; 
-            padding: 20px;
-        } */
-
-        #detailsModal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        
-
-        .modal-content {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-            gap: 10px; 
-            padding: 20px;
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            min-height: 300px;
-            border-radius: 10px;
-        }
-        .modal-content h2{
-            margin-top: 80px;
-        }
-        #modalImage{
-            margin: 60px 0px 0px 20px;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover{
-            color: red;
-        }
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
-        .social-icons a {
-            color: #fff;
-            margin: 0 10px;
-            font-size: 24px;
-        }
-
-        .social-icons a:hover {
-            color: #fff;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .grid-container {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 10px;
-                padding: 10px;
-            }
-
-            .card img {
-                height: 50px;
-                object-fit: cover;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="app-container">
-        <div class="Nav-bar">
-            <h1 class="heading">Product Store</h1>
-            <div class="Nav-items">
-                <p>Home</p>
-                <p>Men</p>
-                <p>Women</p>
-                <p>Bags</p>
-            </div>
+      <div class="Nav-bar">
+        <h1 class="heading">Product Store</h1>
+        <div class="Nav-items">
+          <p>Home</p>
+          <p>Men</p>
+          <p>Women</p>
+          <p>Bags</p>
         </div>
-        <div class="container" id="productsContainer"></div>
+      </div>
+      <div class="container" id="productsContainer"></div>
 
-        <div id="detailsModal">
-            <div class="modal-content">
-                <img id="modalImage" src="" alt="">
-                <div>
-                    <span class="close">&times;</span>
-                    <h2 id="modalTitle"></h2>
-                    <p id="modalDescription"></p>
-                    <p id="modalPrice"></p>
-               </div>
-                
-            </div>
+      <div id="detailsModal">
+        <div class="modal-content">
+          <img id="modalImage" src="" alt="" />
+          <div>
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <p id="modalPrice"></p>
+          </div>
         </div>
-        <div class="footer">
-            <h3>Contact Us</h3>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-            </div>
-            <p>&copy; 2024 Product Store. All rights reserved.</p>
+      </div>
+      <div class="footer">
+        <h3>Contact Us</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
         </div>
+        <p>&copy; 2024 Product Store. All rights reserved.</p>
+      </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('https://fakestoreapi.com/products')
-                .then(response => response.json())
-                .then(data => {
-                    const productsContainer = document.getElementById('productsContainer');
-                    data.forEach(product => {
-                        const productDiv = document.createElement('div');
-                        productDiv.classList.add('product');
-                        productDiv.innerHTML = `
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("https://fakestoreapi.com/products")
+          .then((response) => response.json())
+          .then((data) => {
+            const productsContainer =
+              document.getElementById("productsContainer");
+            data.forEach((product) => {
+              const productDiv = document.createElement("div");
+              productDiv.classList.add("product");
+              productDiv.innerHTML = `
                             <img src="${product.image}" alt="${product.title}">
                             <h4>${product.title}</h4>
                             <p>$${product.price}</p>
                         `;
-                        productDiv.addEventListener('click', () => showProductDetails(product));
-                        productsContainer.appendChild(productDiv);
-                    });
-                })
-                .catch(error => console.error('Error fetching products:', error));
-
-            const detailsModal = document.getElementById('detailsModal');
-            const closeModal = document.querySelector('.close');
-            closeModal.addEventListener('click', () => detailsModal.style.display = 'none');
-
-            window.addEventListener('click', (event) => {
-                if (event.target === detailsModal) {
-                    detailsModal.style.display = 'none';
-                }
+              productDiv.addEventListener("click", () =>
+                showProductDetails(product)
+              );
+              productsContainer.appendChild(productDiv);
             });
+          })
+          .catch((error) => console.error("Error fetching products:", error));
 
-            function showProductDetails(product) {
-                const modalTitle = document.getElementById('modalTitle');
-                const modalDescription = document.getElementById('modalDescription');
-                const modalPrice = document.getElementById('modalPrice');
-                const modalImage = document.getElementById('modalImage');
+        const detailsModal = document.getElementById("detailsModal");
+        const closeModal = document.querySelector(".close");
+        closeModal.addEventListener(
+          "click",
+          () => (detailsModal.style.display = "none")
+        );
 
-                modalTitle.textContent = product.title;
-                modalDescription.textContent = product.description;
-                modalPrice.textContent = `$${product.price}`;
-                modalImage.src = product.image;
-                modalImage.style.width = '150px';
-                modalImage.style.height = '200px';
-                
-
-
-
-                detailsModal.style.display = 'block';
-            }
+        window.addEventListener("click", (event) => {
+          if (event.target === detailsModal) {
+            detailsModal.style.display = "none";
+          }
         });
-    </script>
-</body>
 
+        function showProductDetails(product) {
+          const modalTitle = document.getElementById("modalTitle");
+          const modalDescription = document.getElementById("modalDescription");
+          const modalPrice = document.getElementById("modalPrice");
+          const modalImage = document.getElementById("modalImage");
+
+          modalTitle.textContent = product.title;
+          modalDescription.textContent = product.description;
+          modalPrice.textContent = `$${product.price}`;
+          modalImage.src = product.image;
+          modalImage.style.width = "150px";
+          modalImage.style.height = "200px";
+
+          detailsModal.style.display = "block";
+        }
+      });
+    </script>
+  </body>
 </html>

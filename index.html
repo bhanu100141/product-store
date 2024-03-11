@@ -74,6 +74,12 @@
             height: auto;
 
         }
+        /* #productsContainer{
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 10px; 
+            padding: 20px;
+        } */
 
         #detailsModal {
             display: none;
@@ -86,13 +92,26 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.4);
         }
+        
 
         .modal-content {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 10px; 
+            padding: 20px;
             background-color: #fefefe;
             margin: 10% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
+            min-height: 300px;
+            border-radius: 10px;
+        }
+        .modal-content h2{
+            margin-top: 80px;
+        }
+        #modalImage{
+            margin: 60px 0px 0px 20px;
         }
 
         .close {
@@ -163,11 +182,14 @@
 
         <div id="detailsModal">
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2 id="modalTitle"></h2>
-                <p id="modalDescription"></p>
-                <p id="modalPrice"></p>
                 <img id="modalImage" src="" alt="">
+                <div>
+                    <span class="close">&times;</span>
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalDescription"></p>
+                    <p id="modalPrice"></p>
+               </div>
+                
             </div>
         </div>
         <div class="footer">
@@ -222,6 +244,8 @@
                 modalImage.src = product.image;
                 modalImage.style.width = '150px';
                 modalImage.style.height = '200px';
+                
+
 
 
                 detailsModal.style.display = 'block';
